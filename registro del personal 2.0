@@ -1,0 +1,168 @@
+import tkinter as tk
+from tkinter import messagebox, ttk
+
+class Trabajador:  #inicmaos creando una clase que guarde todos los datos pedidos para el registro de personal
+    def __init__(self):
+        self.nombre = ""
+        self.fecha_nacimiento = ""
+        self.tipo_contratacion = ""
+        self.sexo = ""
+        self.ultimo_grado_estudio = ""
+        self.especialidad = ""
+        self.posgrado = ""
+        self.cedula_profesional = ""
+        self.domicilio = ""
+        self.telefono = ""
+        self.correo_electronico = ""
+        self.fecha_ingreso = ""
+        self.area = ""
+
+lista_trabajadores = []
+
+
+def registrar_datos():  #en este se pediran todos los datos requeridos 
+    t = Trabajador()
+    t.nombre = nombre_entry.get()
+    t.fecha_nacimiento = fecha_nacimiento_entry.get()
+    t.tipo_contratacion = tipo_contratacion_var.get()
+    t.sexo = sexo_var.get()
+    t.ultimo_grado_estudio = ultimo_grado_estudio_var.get()
+    t.especialidad = especialidad_entry.get()
+    t.posgrado = posgrado_entry.get()
+    t.cedula_profesional = cedula_profesional_entry.get()
+    t.domicilio = domicilio_entry.get()
+    t.telefono = telefono_entry.get()
+    t.correo_electronico = correo_electronico_entry.get()
+    t.fecha_ingreso = fecha_ingreso_entry.get()
+    t.area = area_var.get()
+
+    lista_trabajadores.append(t)
+    actualizar_tabla()
+
+    messagebox.showinfo("Registro", "Datos registrados con éxito")
+
+
+def mostrar_todos_los_datos():
+    if not lista_trabajadores:
+        messagebox.showinfo("Datos", "No hay trabajadores registrados.")
+        return
+
+    datos_completos = ""
+    for i, t in enumerate(lista_trabajadores, start=1):
+        datos_completos += f"--- Trabajador {i} ---\n"
+        datos_completos += f"Nombre: {t.nombre}\n"
+        datos_completos += f"Fecha de nacimiento: {t.fecha_nacimiento}\n"
+        datos_completos += f"Tipo de contratación: {t.tipo_contratacion}\n"
+        datos_completos += f"Sexo: {t.sexo}\n"
+        datos_completos += f"Último grado de estudio: {t.ultimo_grado_estudio}\n"
+        datos_completos += f"Especialidad: {t.especialidad}\n"
+        datos_completos += f"Posgrado: {t.posgrado}\n"
+        datos_completos += f"Cédula profesional: {t.cedula_profesional}\n"
+        datos_completos += f"Domicilio: {t.domicilio}\n"
+        datos_completos += f"Teléfono: {t.telefono}\n"
+        datos_completos += f"Correo electrónico: {t.correo_electronico}\n"
+        datos_completos += f"Fecha de ingreso: {t.fecha_ingreso}\n"
+        datos_completos += f"Área: {t.area}\n\n"
+
+    messagebox.showinfo("Datos de todos los trabajadores", datos_completos)
+
+
+def actualizar_tabla(): # en una tabla se mostran los datos principales de los registros del personal como nombre, tipo de contratacion y area en el hospital
+    for row in tabla.get_children():
+        tabla.delete(row)
+    for t in lista_trabajadores:
+        tabla.insert("", "end", values=(t.tipo_contratacion, t.nombre, t.area))
+
+
+root = tk.Tk()
+root.title("Control de Asistencias")
+
+
+nombre_label = tk.Label(root, text="Nombre:")
+nombre_label.grid(row=0, column=0, sticky="e")
+nombre_entry = tk.Entry(root)
+nombre_entry.grid(row=0, column=1)
+
+fecha_nacimiento_label = tk.Label(root, text="Fecha de nacimiento:")
+fecha_nacimiento_label.grid(row=1, column=0, sticky="e")
+fecha_nacimiento_entry = tk.Entry(root)
+fecha_nacimiento_entry.grid(row=1, column=1)
+
+tipo_contratacion_label = tk.Label(root, text="Tipo de contratación:")
+tipo_contratacion_label.grid(row=2, column=0, sticky="e")
+tipo_contratacion_var = tk.StringVar(root)
+tipo_contratacion_var.set("Enfermero")
+tipo_contratacion_option = tk.OptionMenu(root, tipo_contratacion_var, "Enfermero", "Doctor", "Otros")
+tipo_contratacion_option.grid(row=2, column=1)
+
+sexo_label = tk.Label(root, text="Sexo:")
+sexo_label.grid(row=3, column=0, sticky="e")
+sexo_var = tk.StringVar(root)
+sexo_var.set("Femenino")
+sexo_option = tk.OptionMenu(root, sexo_var, "Femenino", "Masculino")
+sexo_option.grid(row=3, column=1)
+
+ultimo_grado_estudio_label = tk.Label(root, text="Último grado de estudio:")
+ultimo_grado_estudio_label.grid(row=4, column=0, sticky="e")
+ultimo_grado_estudio_var = tk.StringVar(root)
+ultimo_grado_estudio_var.set("Doctorado")
+ultimo_grado_estudio_option = tk.OptionMenu(root, ultimo_grado_estudio_var, "Doctorado", "Maestría", "Licenciatura", "Auxiliar", "Técnico General")
+ultimo_grado_estudio_option.grid(row=4, column=1)
+
+especialidad_label = tk.Label(root, text="Especialidad:")
+especialidad_label.grid(row=5, column=0, sticky="e")
+especialidad_entry = tk.Entry(root)
+especialidad_entry.grid(row=5, column=1)
+
+posgrado_label = tk.Label(root, text="Posgrado:")
+posgrado_label.grid(row=6, column=0, sticky="e")
+posgrado_entry = tk.Entry(root)
+posgrado_entry.grid(row=6, column=1)
+
+cedula_profesional_label = tk.Label(root, text="Cédula profesional:")
+cedula_profesional_label.grid(row=7, column=0, sticky="e")
+cedula_profesional_entry = tk.Entry(root)
+cedula_profesional_entry.grid(row=7, column=1)
+
+domicilio_label = tk.Label(root, text="Domicilio:")
+domicilio_label.grid(row=8, column=0, sticky="e")
+domicilio_entry = tk.Entry(root)
+domicilio_entry.grid(row=8, column=1)
+
+telefono_label = tk.Label(root, text="Teléfono:")
+telefono_label.grid(row=9, column=0, sticky="e")
+telefono_entry = tk.Entry(root)
+telefono_entry.grid(row=9, column=1)
+
+correo_electronico_label = tk.Label(root, text="Correo electrónico:")
+correo_electronico_label.grid(row=10, column=0, sticky="e")
+correo_electronico_entry = tk.Entry(root)
+correo_electronico_entry.grid(row=10, column=1)
+
+fecha_ingreso_label = tk.Label(root, text="Fecha de ingreso:")
+fecha_ingreso_label.grid(row=11, column=0, sticky="e")
+fecha_ingreso_entry = tk.Entry(root)
+fecha_ingreso_entry.grid(row=11, column=1)
+
+area_label = tk.Label(root, text="Área:")
+area_label.grid(row=12, column=0, sticky="e")
+area_var = tk.StringVar(root)
+area_var.set("Hospitalización")
+area_option = tk.OptionMenu(root, area_var, "Hospitalización", "Urgencias")
+area_option.grid(row=12, column=1)
+
+
+registrar_button = tk.Button(root, text="Registrar Datos", command=registrar_datos)
+registrar_button.grid(row=13, column=0, pady=10)
+
+mostrar_button = tk.Button(root, text="Mostrar Datos", command=mostrar_todos_los_datos)
+mostrar_button.grid(row=13, column=1, pady=10)
+
+
+tabla = ttk.Treeview(root, columns=("Contratación", "Nombre", "Área"), show="headings") 
+tabla.heading("Contratación", text="Tipo de contratación")
+tabla.heading("Nombre", text="Nombre")
+tabla.heading("Área", text="Área")
+tabla.grid(row=14, column=0, columnspan=2, pady=10)
+
+root.mainloop()
