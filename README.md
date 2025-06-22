@@ -14,12 +14,12 @@ Sistema de Control de Citas en un Hospital
 
 3. Registro de pacientes
 - Informacio del paciente como:
-              nombre
-              edad
-              No. seguuro social
-              area asignada : Medicina General, Urgencias o Hospitalizacion
-              docotor asignado
-              enfermero asignado
+           -  nombre
+           - edad
+           -   No. seguuro social
+           -   area asignada : Medicina General, Urgencias o Hospitalizacion
+           -   docotor asignado
+           -   enfermero asignado
   - asignarle una camilla 
 
 4. Estado de camillas y asignacion
